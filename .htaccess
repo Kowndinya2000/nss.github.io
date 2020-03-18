@@ -1,6 +1,6 @@
 RewriteEngine on 
-RewriteCond %{index.html} !-d
-RewriteCond %{index.html}\.html -f
-RewriteCond %{home/index.html} !-d
-RewriteCond %{home/index.html}\.html -f
+RewriteCond %{index} !-d
+RewriteCond %{index}\.html -f
+RewriteCond %{home/index} !-d
+RewriteCond %{home/index}\.html -f
 RewriteRule ^(.*)$ $1.html [NC,L]

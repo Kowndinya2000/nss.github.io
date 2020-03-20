@@ -1,0 +1,145 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+    <title>CodePen - Curve SVG Background Animation</title>
+    <style>
+    @import "https://fonts.googleapis.com/css?family=Ubuntu:300, 400, 500, 700";
+    *, *:after, *:before {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .svg-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+    svg path {
+      transition: .1s;
+    }
+    svg:hover path {
+      d: path("M 800 300 Q 400 250 0 300 L 0 0 L 800 0 L 800 300 Z");
+    }
+    
+    body {
+      background: #fff;
+      color: #333;
+      font-family: 'Ubuntu', sans-serif;
+      position: relative;
+    }
+    
+    h3 {
+      font-weight: 400;
+    }
+    
+    header {
+      color: #fff;
+      padding-top: 10vw;
+      padding-bottom: 30vw;
+      text-align: center;
+    }
+    
+    main {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 0vh 0 10vh;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    main::after {
+      content: '';
+      position: absolute;
+      top: calc(10vh + 1.618em);
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+    }
+    
+    footer {
+      background: #dddee1;
+      padding: 5vh 0;
+      text-align: center;
+      position: relative;
+    }
+    
+    small {
+      opacity: .5;
+      font-weight: 300;
+    }
+    small a {
+      color: inherit;
+    }
+    </style>
+    <script>
+      window.console = window.console || function(t) {};
+    </script>
+    <script>
+      if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+      }
+    </script>
+    </head>
+    <body translate="no">
+    
+    <div class="svg-container">
+    
+    <svg viewBox="0 0 800 400" class="svg">
+    <path id="curve" fill="#ECF0FF" d="M 800 300 Q 400 350 0 300 L 0 0 L 800 0 L 800 300 Z">
+    </path>
+    </svg>
+    </div>
+    <header>
+        <h1 style="color: black;font-size: 40px;line-height: 1.5;font-family: poppins,Arial,sans-serif;">
+            <span style="color: #3F65FF;">Connect </span>With Us
+        </h1>
+        <p style="color: #6E7B97;margin-top: 1rem;">We welcome you on board!</p>
+    </header>
+    <main>
+    <p>
+        <iframe src="connect.html" style="width: 100%;height: 20rem;" frameBorder = "0">
+        </iframe>
+    </p>
+    </main>
+    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+    <script id="rendered-js">
+    (function () {
+      var $curve = document.getElementById("curve");
+      var last_known_scroll_position = 0;
+      var defaultCurveValue = 350;
+      var curveRate = 3;
+      var ticking = false;
+      var curveValue;
+      function scrollEvent(scrollPos) {
+        if (scrollPos >= 0 && scrollPos < defaultCurveValue) {
+          curveValue = defaultCurveValue - parseFloat(scrollPos / curveRate);
+          $curve.setAttribute(
+          "d",
+          "M 800 300 Q 400 " + curveValue + " 0 300 L 0 0 L 800 0 L 800 300 Z");
+    
+        }
+      }
+      window.addEventListener("scroll", function (e) {
+        last_known_scroll_position = window.scrollY;
+    
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            scrollEvent(last_known_scroll_position);
+            ticking = false;
+          });
+        }
+    
+        ticking = true;
+      });
+    })();
+        </script>
+    
+    
+    </body></html>
